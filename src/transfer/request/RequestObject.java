@@ -13,30 +13,30 @@ import java.io.Serializable;
  */
 public class RequestObject implements Serializable {
 
-    private int operation;
-    private Object data;
+   private int action;
+    private Object request;
 
     public RequestObject() {
     }
 
-    public RequestObject(int operation, Object data) {
-        this.operation = operation;
-        this.data = data;
+    public RequestObject(int action, Object param) {
+        this.action = action;
+        this.request = param;
     }
 
-    public int getOperation() {
-        return operation;
+    public Object getRequest() {
+        return request;
     }
 
-    public void setOperation(int operation) {
-        this.operation = operation;
+    public void setRequest(Object request) {
+        this.request = request;
     }
 
-    public Object getData() {
-        return data;
+    public int getAction() {
+        return action;
     }
 
-    public void setData(Object data) {
-        this.data = data;
+    public void setAction(int action) {
+        this.action = action;
     }
 }

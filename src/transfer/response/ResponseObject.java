@@ -6,41 +6,27 @@
 package transfer.response;
 
 import java.io.Serializable;
+import transfer.util.EnumResponseStatus;
 
 /**
  *
  * @author Mira
  */
 public class ResponseObject implements Serializable{
-    private int code;
-    private Object data;
+     private EnumResponseStatus responseStatus;
     private String message;
+    private Object response;
 
     public ResponseObject() {
     }
 
-    public ResponseObject(int code, Object data, String message) {
-        this.code = code;
-        this.data = data;
+    public ResponseObject(EnumResponseStatus responseStatus, String message, Object response) {
+        this.responseStatus = responseStatus;
         this.message = message;
+        this.response = response;
     }
 
-    
-    public int getCode() {
-        return code;
-    }
-
-    public void setCode(int code) {
-        this.code = code;
-    }
-
-    public Object getData() {
-        return data;
-    }
-
-    public void setData(Object data) {
-        this.data = data;
-    }
+   
 
     public String getMessage() {
         return message;
@@ -48,5 +34,21 @@ public class ResponseObject implements Serializable{
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    public EnumResponseStatus getResponseStatus() {
+        return responseStatus;
+    }
+
+    public void setResponseStatus(EnumResponseStatus responseStatus) {
+        this.responseStatus = responseStatus;
+    }
+
+    public Object getResponse() {
+        return response;
+    }
+
+    public void setResponse(Object response) {
+        this.response = response;
     }
 }

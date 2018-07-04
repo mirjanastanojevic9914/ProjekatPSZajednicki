@@ -9,7 +9,6 @@ package transfer.util;
  *
  * @author Mira
  */
-public interface IStatus {
-    public static final int OK = 1;
-    public static final int ERROR = 0;
+public enum EnumResponseStatus {
+    ERROR,OK
 }
