@@ -159,7 +159,7 @@ public class Doctor implements GenericDomainObject {
 
     @Override
     public String returnTableName() {
-        return "Doctor d";
+        return "Doctor ";
     }
 
     @Override
@@ -167,7 +167,7 @@ public class Doctor implements GenericDomainObject {
         try {
             List<GenericDomainObject> list = new ArrayList<>();
             while (rs.next()) {
-                list.add(new Doctor(rs.getInt("d.id"), rs.getString("name"), rs.getString("surname"),rs.getString("password"),
+                list.add(new Doctor(rs.getInt("doctor.id"), rs.getString("name"), rs.getString("surname"),rs.getString("password"),
                         rs.getString("gender"), rs.getDate("dateBirth"), rs.getString("mobileNumber"),
                         rs.getDate("dateEmployment"), rs.getDouble("salary"), new DoctorType(rs.getInt("dt.id"), rs.getString("doctorType"))));
             }
@@ -181,7 +181,7 @@ public class Doctor implements GenericDomainObject {
     @Override
     public String returnInsertValues() {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        return "" + id + ",'" + name + "','" + surname + "','" + password + "','" + gender + "','" + df.format(dateBirth) + "','"
+        return "'" + name + "','" + surname + "','" + password + "','" + gender + "','" + df.format(dateBirth) + "','"
                 + mobileNumber + "','" + df.format(dateEmployment) + "', " + salary + ", " + doctorType.getId() + "";
     }
 
@@ -190,7 +190,7 @@ public class Doctor implements GenericDomainObject {
         GenericDomainObject gdo = null;
         try {
             if (rs.next()) {
-                id = rs.getInt("d.id");
+                id = rs.getInt("doctor.id");
                 name = rs.getString("name");
                 surname = rs.getString("surname");
                 password = rs.getString("password");
@@ -214,12 +214,12 @@ public class Doctor implements GenericDomainObject {
 
     @Override
     public String returnConditionWithID() {
-        return "WHERE d.id=" + id;
+        return " doctor.id = " + id;
     }
 
     @Override
     public String returnID() {
-        return "d.id";
+        return "doctor.id";
     }
 
     @Override
@@ -289,16 +289,48 @@ public class Doctor implements GenericDomainObject {
 
     @Override
     public String returnTableWithJoinCondition() {
-        return " JOIN doctorType dt ON(d.idDoctorType = dt.id)";
+        return " doctor JOIN doctorType dt ON(doctor.idDoctorType = dt.id)";
 
     }
 
     @Override
     public String returnSearchCriteria(String criteria) {
+       if (criteria.equals("")) {
+            return "";
+        } else {
+            DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
+            String criteriaDate;
+            Double criteriaSalary;
+            try {
+                Date date = df.parse(criteria);
+                df = new SimpleDateFormat("yyyy-MM-dd");
+                criteriaDate = df.format(date);
+                criteriaSalary = Double.parseDouble(criteria);
+                
+            } catch (ParseException ex) {
+                criteriaDate = criteria;
+                criteriaSalary = -1.0;
+            }
+            return "WHERE name LIKE '%" + criteria + "%' OR surname LIKE '%" + criteria + "%' OR gender LIKE '%" + criteria + "%' OR dateBirth LIKE '%" + criteriaDate + "%' OR mobileNumber LIKE '%" + criteria + "%' OR dateEmployment LIKE '%" + criteriaDate + "%' OR salary =" + criteriaSalary;
+        }
+    }
+
+    @Override
+    public String returnUpdateValues() {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return "id=" + id + ", name='" + name + "',surname='" + surname + "', password='" + password + "',gender='" + gender + "', dateBirth='" + df.format(dateBirth)
+                + "',mobileNumber='" + mobileNumber + "', dateEmployment='" + df.format(dateEmployment) + "', salary=" + salary + ", idDoctorType=" + doctorType.getId() + "";
+    }
+
+    @Override
+    public String returnNameOfAtributtesForInsert() {
+        return "(name, surname, password, gender, dateBirth, mobileNumber, dateEmployment, salary, idDoctorType)";
+    }
+    public String returnSearchCriteriaForLogin(String criteria) {
          if (criteria.equals("")) {
             return "";
         }
-         
+       
         String[] array = criteria.split("/");
         String name = array[0];
         String surname = array[1];
@@ -306,12 +338,4 @@ public class Doctor implements GenericDomainObject {
         
         return "WHERE name = '" + name + "' AND surname = '" + surname + "' AND password = '" + password + "'";
     }
-
-    @Override
-    public String returnUpdateValues() {
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        return "id=" + id + ", name='" + name + "',surname='" + surname + "', name='" + password + "',gender=" + gender + "', dateBirth='" + df.format(dateBirth)
-                + "',mobileNumber='" + mobileNumber + "', dateEmployment" + df.format(dateEmployment) + "', salary=" + salary + ", idDoctorType=" + doctorType.getId() + "";
-    }
-
 }

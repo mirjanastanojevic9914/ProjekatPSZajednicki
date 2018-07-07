@@ -217,6 +217,16 @@ public class Refer implements GenericDomainObject{
         return "idExamination=" + examination.getId() + ", id=" + id + ",description='" + description + "', dateValidity='" + df.format(dateValidity) + "', idDoctorType= "+doctorType.getId()+"";
                
     }
+
+    @Override
+    public String returnNameOfAtributtesForInsert() {
+        return "";
+    }
+
+    @Override
+    public String returnSearchCriteriaForLogin(String criteria) {
+        return "";
+    }
     
     
     

@@ -310,4 +310,14 @@ public class Examination implements GenericDomainObject {
                 + status + "',report=' " + report + "', idPatient= " + patient.getId() + ", idDoctor= " + doctor.getId();
     }
 
+    @Override
+    public String returnNameOfAtributtesForInsert() {
+        return "";
+    }
+
+    @Override
+    public String returnSearchCriteriaForLogin(String criteria) {
+        return"";
+    }
+
 }

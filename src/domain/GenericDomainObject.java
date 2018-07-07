@@ -37,6 +37,8 @@ public interface GenericDomainObject extends Serializable{
 
     public String returnUpdateValues();
 
+    public String returnNameOfAtributtesForInsert(); 
     
+    public String returnSearchCriteriaForLogin(String criteria);
     
 }

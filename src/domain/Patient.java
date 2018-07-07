@@ -110,7 +110,7 @@ public class Patient implements GenericDomainObject{
  
     @Override
     public String returnTableName() {
-        return "Patient";
+        return "Patient ";
     }
 
     @Override
@@ -233,7 +233,7 @@ public class Patient implements GenericDomainObject{
             } catch (ParseException ex) {
                 criteriaDate = criteria;
             }
-            return "WHERE name = '" + criteria + "' OR surname = '" + criteria + "' OR gender = '" + criteria + "' OR dateBirth = '" + criteriaDate + "' OR mobileNumber = '" + criteria + "'";
+            return "WHERE name LIKE '%" + criteria + "%' OR surname LIKE '%" + criteria + "%' OR gender LIKE '%" + criteria + "%' OR dateBirth LIKE '%" + criteriaDate + "%' OR mobileNumber LIKE '%" + criteria + "%'";
         }
     }
 
@@ -242,5 +242,15 @@ public class Patient implements GenericDomainObject{
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return "name='" + name + "',surname='" + surname + "',gender='" + gender + "', dateBirth='" + df.format(dateBirth)
                 + "',mobileNumber='" + mobileNumber + "'";
+    }
+
+    @Override
+    public String returnNameOfAtributtesForInsert() {
+        return "(name, surname, gender, dateBirth, mobileNumber)";
+    }
+
+    @Override
+    public String returnSearchCriteriaForLogin(String criteria) {
+        return "";
     }
 }

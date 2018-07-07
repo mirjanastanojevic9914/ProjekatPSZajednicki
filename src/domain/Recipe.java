@@ -230,6 +230,16 @@ public class Recipe implements GenericDomainObject{
                
     }
 
+    @Override
+    public String returnNameOfAtributtesForInsert() {
+        return "";
+    }
+
+    @Override
+    public String returnSearchCriteriaForLogin(String criteria) {
+        return "";
+    }
+
     
     
 }

@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 /**
  *
@@ -50,9 +51,40 @@ public class DoctorType implements GenericDomainObject{
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public String toString() {
+        return doctorType;
+    }
+
+    
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DoctorType other = (DoctorType) obj;
+        if (this.id != other.id) {
+            return false;
+        }
+        if (!Objects.equals(this.doctorType, other.doctorType)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
+    
      @Override
     public String returnTableName() {
-        return "DoctorType";
+        return "DoctorType ";
     }
 
     @Override
@@ -94,7 +126,7 @@ public class DoctorType implements GenericDomainObject{
 
     @Override
     public String returnConditionWithID() {
-        return "WHERE id=" + id;
+        return " id=" + id;
     }
 
     @Override
@@ -145,6 +177,16 @@ public class DoctorType implements GenericDomainObject{
     @Override
     public String returnUpdateValues() {
         return "id=" + id + ", doctorType='" + doctorType + "'";
+    }
+
+    @Override
+    public String returnNameOfAtributtesForInsert() {
+        return "";
+    }
+
+    @Override
+    public String returnSearchCriteriaForLogin(String criteria) {
+        return "";
     }
     
 }

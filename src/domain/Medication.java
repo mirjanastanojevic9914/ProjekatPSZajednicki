@@ -108,7 +108,7 @@ public class Medication implements GenericDomainObject {
 
     @Override
     public String returnTableName() {
-        return "Medication";
+        return "Medication ";
     }
 
     @Override
@@ -158,7 +158,7 @@ public class Medication implements GenericDomainObject {
 
     @Override
     public String returnConditionWithID() {
-        return "WHERE id=" + id;
+        return " id=" + id;
     }
 
     @Override
@@ -235,6 +235,16 @@ public class Medication implements GenericDomainObject {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
         return "id=" + id + ", name='" + name + "', effect='" + effect + "', quantity='" + quantity + "', shape='" + shape + "', dateValidity='"
                 + df.format(dateValidity) + "', producer='" + producer + "'";
+    }
+
+    @Override
+    public String returnNameOfAtributtesForInsert() {
+        return "";
+    }
+
+    @Override
+    public String returnSearchCriteriaForLogin(String criteria) {
+        return "";
     }
 
 }

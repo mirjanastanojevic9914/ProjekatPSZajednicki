@@ -212,4 +212,14 @@ public class Illness implements GenericDomainObject{
         return "id=" + id + ", name='" + name + "',description='" + description + "',idGroupIllness=" + groupIllness.getId() + "";
 
     }
+
+    @Override
+    public String returnNameOfAtributtesForInsert() {
+        return "";
+    }
+
+    @Override
+    public String returnSearchCriteriaForLogin(String criteria) {
+        return "";
+    }
 }
